@@ -1,0 +1,29 @@
+{
+  "name": "chat-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "tap test/**/*.test.js",
+    "start": "fastify start -p 3005  -l info app.js",
+    "dev": "fastify start -p 3005 -w -l info -P app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.6.0",
+    "fastify": "^2.0.0",
+    "fastify-autoload": "^1.0.0",
+    "fastify-cli": "^1.5.0",
+    "fastify-plugin": "^1.5.0",
+    "fastify-websocket": "^2.0.11",
+    "uuid": "^8.3.1"
+  },
+  "devDependencies": {
+    "tap": "^12.5.3"
+  }
+}

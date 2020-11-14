@@ -1,0 +1,49 @@
+version: '3.3'
+
+networks:
+  demo:
+
+services:
+  chat-server:
+    image: node:14.15.0
+    container_name: rabbit-chat-server
+    ports:
+      - "3005:3005"
+    links:
+      - rabbitmq
+    volumes:
+      - ./chat-server:/fastify
+    command: bash -c "npm i -g fastify-cli && cd /fastify && npm i && npm run dev"
+    networks:
+      - demo
+  chat-ui:
+    image: node:14.15.0
+    container_name: rabbit-chat-ui
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./chat-ui:/app
+    command: bash -c "cd /app && npm i && npm start"
+    tty: true
+    networks:
+      - demo
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: app_rabbitmq
+    restart: unless-stopped
+    user: root
+    hostname: "rabbit_chat"
+    environment:
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports: 
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - demo_chat_rabbit_data:/var/lib/rabbitmq
+    networks:
+      - demo
+
+volumes:
+  demo_chat_rabbit_data:
