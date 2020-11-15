@@ -4,10 +4,13 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { Provider } from 'mobx-react'
 import { store } from './store'
+import { CssBaseline } from '@material-ui/core'
+
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+      <CssBaseline />
       <App />
     </Provider>
   </React.StrictMode>,

@@ -39,11 +39,6 @@ const Store = types.model({
   onReceiveMessage(message) {
     self.messages.push(message)
   }
-})).views(self => ({
-  get messageHistory() {
-    const messages = self.messages
-    return messages.reverse()
-  }
 }))
 
 const store = Store.create({
